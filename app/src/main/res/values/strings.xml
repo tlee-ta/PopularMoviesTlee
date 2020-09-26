@@ -1,15 +1,23 @@
 <resources>
     <string name="app_name">Popular Movies</string>
 
-    <string name="sort_popular">Sort: Popular</string>
-    <string name="sort_top">Sort: Top Rated</string>
+    <string name="sort_popular">Popular</string>
+    <string name="sort_top">Top Rated</string>
+    <string name="sort_favorite">Favorites</string>
 
     <string name="content_des_poster">Movie Poster</string>
-    <string name="original_title">Original Title: </string>
-    <string name="overview">Summary: </string>
-    <string name="rating">User Rating: </string>
-    <string name="release_date">Release Date: </string>
+
+    <string name="trailers_title">Trailers: </string>
+    <string name="reviews_title">Reviews: </string>
+    <string name="rating_total">/10</string>
 
     <string name="error_message">Movie data is not available</string>
+
+    <string name="reviews_unavailable">Reviews for this movie are not available</string>
+    <string name="no_reviews">There are no reviews for this movie</string>
+
+    <string name="trailers_unavailable">Trailers for this movie are not available</string>
+    <string name="no_trailers">There are no trailers for this movie</string>
+
     <string name="na">Info Not Available</string>
 </resources>

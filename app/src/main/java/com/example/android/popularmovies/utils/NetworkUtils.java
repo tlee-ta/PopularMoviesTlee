@@ -18,10 +18,9 @@ public class NetworkUtils {
     private static final String api_key = "";
     private static final String format_json = "json";
 
-
-    public static URL buildUrl (String sortType){
+    public static URL buildUrl(String path){
         Uri builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon()
-                .appendEncodedPath(sortType)
+                .appendEncodedPath(path)
                 .appendQueryParameter(API_KEY_PARAM, api_key)
                 .appendQueryParameter(FORMAT_PARAM, format_json)
                 .build();

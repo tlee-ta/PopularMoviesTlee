@@ -1,7 +1,11 @@
 package com.example.android.popularmovies;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +20,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.android.popularmovies.database.MainFavoriteViewModel;
 import com.example.android.popularmovies.model.Movie;
 import com.example.android.popularmovies.utils.JsonUtils;
 import com.example.android.popularmovies.utils.NetworkUtils;
@@ -23,6 +28,7 @@ import com.example.android.popularmovies.MovieAdapter.MovieAdapterOnClickHandler
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapterOnClickHandler {
 
@@ -131,7 +137,25 @@ public class MainActivity extends AppCompatActivity implements MovieAdapterOnCli
             loadMovieData(sortTop);
             return true;
         }
+        else if (id == R.id.sort_favorite)
+        {
+            getAllFavorites();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void getAllFavorites() {
+        MainFavoriteViewModel mainFavoriteViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(MainFavoriteViewModel.class);
+        final LiveData<Movie[]> allFavorites = mainFavoriteViewModel.getFavorites();
+        allFavorites.observe(this, new Observer<Movie[]>() {
+            @Override
+            public void onChanged(@Nullable Movie[] favorites) {
+                allFavorites.removeObserver(this);
+                mMovieAdapter.setMovieData(favorites);
+            }
+        });
+    }
+
 }
